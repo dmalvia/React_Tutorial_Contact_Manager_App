@@ -7,9 +7,14 @@
   padding: 10px;
 }
 
-.ui.search input {
+.ui.search .input {
   width: 100%;
-  border-radius: 0 !important;
+}
+.ui.search .prompt {
+  border-radius: 0px;
+}
+.ui.input > input {
+  border: 1.5px solid rgba(34, 36, 38, 0.15);
 }
 
 .item {
@@ -28,4 +33,3 @@ i.icon {
 .center-div {
   text-align: center;
 }
-
