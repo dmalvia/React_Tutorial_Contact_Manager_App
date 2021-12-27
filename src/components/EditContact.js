@@ -1,39 +1,40 @@
-import React from "react";
+import React, {useState} from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useContactsCrud } from "../context/ContactsCrudContext";
 
-class EditContact extends React.Component {
-  constructor(props) {
-    super(props);
-    const { id, name, email } = props.location.state.contact;
-    this.state = {
-      id,
-      name,
-      email,
-    };
-  }
+const EditContact = () =>  {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const { id, name, email } = location.state.contact;
+  const [newEmail, setNewEmail] = useState(email);
+  const [newName, setNewName] = useState(name);
+  const {updateContactHandler} = useContactsCrud();
+  
 
-  update = (e) => {
+  const update = (e) => {
     e.preventDefault();
-    if (this.state.name === "" || this.state.email === "") {
+    if (newName === "" || newEmail === "") {
       alert("ALl the fields are mandatory!");
       return;
     }
-    this.props.updateContactHandler(this.state);
-    this.setState({ name: "", email: "" });
-    this.props.history.push("/");
+    updateContactHandler({id, name: newName, email : newEmail});
+    setNewName("");
+    setNewEmail("")
+    navigate("/");
   };
-  render() {
+
     return (
       <div className="ui main">
         <h2>Edit Contact</h2>
-        <form className="ui form" onSubmit={this.update}>
+        <form className="ui form" onSubmit={update}>
           <div className="field">
             <label>Name</label>
             <input
               type="text"
               name="name"
               placeholder="Name"
-              value={this.state.name}
-              onChange={(e) => this.setState({ name: e.target.value })}
+              value={newName}
+              onChange={(e) => setNewName(e.target.value)}
             />
           </div>
           <div className="field">
@@ -42,15 +43,14 @@ class EditContact extends React.Component {
               type="text"
               name="email"
               placeholder="Email"
-              value={this.state.email}
-              onChange={(e) => this.setState({ email: e.target.value })}
+              value={newEmail}
+              onChange={(e) => setNewEmail(e.target.value)}
             />
           </div>
           <button className="ui button blue">Update</button>
         </form>
       </div>
     );
-  }
 }
 
 export default EditContact;
