@@ -1,5 +1,5 @@
 .main {
-  margin-top: 5em;
+  margin: 5em;
 }
 
 .center {
@@ -7,11 +7,19 @@
   padding: 10px;
 }
 
-.ui.search input {
+.ui.search input {            
   width: 100%;
   border-radius: 0 !important;
 }
-
+.ui.search .input {
+  width: 100%;
+}
+.ui.search .prompt {
+  border-radius: 0px;
+}
+.ui.input > input {
+  border: 1.5px solid rgba(34, 36, 38, 0.15);
+}
 .item {
   padding: 15px 0px !important;
 }
@@ -20,4 +28,14 @@ i.icon {
   float: right;
   font-size: 20px;
   cursor: pointer;
+}
+.menu{
+  margin: 5em;
+  font-size: large;
+}
+.contact{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  
 }
